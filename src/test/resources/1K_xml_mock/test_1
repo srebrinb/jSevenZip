@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="BG203283623_2_xslt_bul.xslt" type="text/xsl"?>
+<Invoice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" GeneratingSystem=" efTools_XML v1.5.2633" Cancellation="false">
+  <InvoiceHeader>
+    <InvoiceNumber>0000000001</InvoiceNumber>
+    <InvoiceDate>2016-08-04</InvoiceDate>
+    <InvoiceTypeCode>INV</InvoiceTypeCode>
+    <InvoiceTypeText>Фактура по НЗОК</InvoiceTypeText>
+    <InvoiceOriginCode>ORIG</InvoiceOriginCode>
+    <InvoiceOriginText>ОР�?Г�?НАЛ</InvoiceOriginText>
+    <TaxPointDate>2016-08-04</TaxPointDate>
+    <InvoiceCreatedBy>КАПКА Н�?КОЛОВА                </InvoiceCreatedBy>
+  </InvoiceHeader>
+  <Delivery>
+    <Date>2016-08-04</Date>
+    <Address>
+      <Name>ЧА НОТА БЕНЕ 5-КАЗ�?ЧЕНЕ</Name>
+      <Street>СОФ�?Я КАЗ�?ЧЕНЕ,УЛ.ЦАР БОР�?С III 38</Street>
+      <Town>КАЗ�?ЧЕНЕ</Town>
+      <AddressExtension>Маршрут 03 \ 10:35</AddressExtension>
+    </Address>
+  </Delivery>
+  <Biller>
+    <VATIdentificationNumber>BG203283623</VATIdentificationNumber>
+    <IdentificationNumber>203283623</IdentificationNumber>
+    <ConsolidatorsBillerID>203283623</ConsolidatorsBillerID>
+    <Address>
+      <Name>ФЬОН�?КС Фарма ЕООД</Name>
+      <Street>София,ул.ОКОЛОВРЪСТЕН ПЪТ 199А</Street>
+      <Town>София</Town>
+      <ZIP>1700</ZIP>
+      <Country>България</Country>
+      <Phone>9658165,9658140,9658144,9658130</Phone>
+      <Email>office@phoenixpharma.bg</Email>
+      <Web>http://www.phoenixpharma.bg</Web>
+    </Address>
+  </Biller>
+  <Recipient>
+    <VATIdentificationNumber>BG200229652</VATIdentificationNumber>
+    <IdentificationNumber>200229652</IdentificationNumber>
+    <BillersRecipientID>207971</BillersRecipientID>
+    <Address>
+      <Name>НОТА БЕНЕ ФАРМА ООД</Name>
+      <Street>СОФ�?Я РУСАЛЯ 5,ЕТ.5,АП.11</Street>
+      <Town>КАЗ�?ЧЕНЕ</Town>
+      <Phone>0876204504</Phone>
+      <Email>archive@efaktura.bg</Email>
+      <AddressExtension>ЧА НОТА БЕНЕ 5-КАЗ�?ЧЕНЕ</AddressExtension>
+    </Address>
+  </Recipient>
+  <Details>
+    <ItemList ListType="structured">
+      <ListLineItem>
+        <ListElement Type="IdentifierType" Usage="Number">1</ListElement>
+        <ListElement Type="CodeType" Usage="NZOKCode">RF094</ListElement>
+        <ListElement Type="StringType" Usage="Description">СП�?Р�?ВА КАПС. С ПРАХ 18МКГ Х 30</ListElement>
+        <ListElement Type="StringType" Usage="Unit">БР</ListElement>
+        <ListElement Type="DecimalType" Usage="Quantity">3</ListElement>
+        <ListElement Type="AmountType" Usage="BasePrice">50.01</ListElement>
+        <ListElement Type="PercentageType" Usage="TradeCharge">0</ListElement>
+        <ListElement Type="PercentageType" Usage="Discount">0</ListElement>
+        <ListElement Type="AmountType" Usage="UnitPrice">52.01</ListElement>
+        <ListElement Type="AmountType" Usage="Amount">156.03</ListElement>
+        <ListElement Type="AmountType" Usage="GrossUnitPrice">62.41</ListElement>
+        <ListElement Type="StringType" Usage="BatchNumber">602483</ListElement>
+        <ListElement Type="StringType" Usage="Certificate">3365811/</ListElement>
+        <ListElement Type="StringType" Usage="ExpireDate">01.18</ListElement>
+        <ListElement Type="AmountType" Usage="PharmacyUnitPrice">72.01</ListElement>
+        <ListElement Type="AmountType" Usage="TopUnitPrice">72.01</ListElement>
+        <ListElement Type="StringType" Usage="PriceGroup"/>
+      </ListLineItem>
+    </ItemList>
+    <TotalVATExcludedAmount Currency="BGN">156.03</TotalVATExcludedAmount>
+  </Details>
+  <Tax>
+    <VAT>
+      <Item>
+        <TaxedAmount Currency="BGN">156.03</TaxedAmount>
+        <Percentage>20.00</Percentage>
+        <Amount Currency="BGN">31.21</Amount>
+      </Item>
+    </VAT>
+  </Tax>
+  <TotalGrossAmount Currency="BGN">187.24</TotalGrossAmount>
+  <PaymentMethod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CreditTransferType">
+    <Comment>Отложено, Банков път</Comment>
+    <BeneficiaryAccount>
+      <BankName>Уни Кредит Булбанк</BankName>
+      <BIC>UNCRBGSF</BIC>
+      <IBAN>BG91UNCR96601030899522</IBAN>
+    </BeneficiaryAccount>
+  </PaymentMethod>
+  <PaymentConditions>
+    <DueDate>2016-10-02</DueDate>
+    <Comment/>
+  </PaymentConditions>
+  <PresentationDetails>
+    <LayoutID>0100</LayoutID>
+    <Language>bul</Language>
+    <TransformationID>2</TransformationID>
+  </PresentationDetails>
+  <Custom>
+    <Description>
+      <ID>InWords</ID>
+      <Value>СТО ОСЕМДЕСЕТ �? СЕДЕМ ЛЕВА �? ДВАДЕСЕТ �? ЧЕТ�?Р�? СТОТ�?НК�?</Value>
+    </Description>
+    <Description>
+      <ID>MOLRecipient</ID>
+      <Value>ВЕНЦ�?СЛАВ ЯНЧЕВ</Value>
+    </Description>
+    <Description>
+      <ID>MOLBiller</ID>
+      <Value>ЕЛ�?ЯНА ВЛАДОВА</Value>
+    </Description>
+    <Description>
+      <ID>BillerLicence</ID>
+      <Value>IV-P-T-EU-S-022-5/16.11.2015 г</Value>
+    </Description>
+    <Description>
+      <ID>BillerDrugLicence</ID>
+      <Value>T-36/02.02.2016 Г.</Value>
+    </Description>
+    <Description>
+      <ID>RecipientLicence</ID>
+      <Value>АП-1277/07.06.2016</Value>
+    </Description>
+    <Description>
+      <ID>RecipientDrugLicence</ID>
+      <Value>Н-2799/11.07.2016</Value>
+    </Description>
+    <Description>
+      <ID>PaymentDate</ID>
+      <Value>2016-10-02</Value>
+    </Description>
+    <Description>
+      <ID>TotalPharmacyAmount</ID>
+      <Value>216.03</Value>
+    </Description>
+    <Description>
+      <ID>SignedBy</ID>
+      <Value>Стоян Граченлиев</Value>
+    </Description>
+  </Custom>
+  
+<ds:Signature Id="Signature-MSCrypt-1470376852">
+		<ds:SignedInfo>
+			<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+			<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+			<ds:Reference URI="">
+				<ds:Transforms>
+					<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+				</ds:Transforms>
+				<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<ds:DigestValue>ztIeTr3YwMBX6OUc8Jb45o5+lYk=</ds:DigestValue>
+			</ds:Reference>
+		<ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#SignedProperties-1470376852"><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>oiB/j38AVg5XEQi3dz60iAXo03Q=</ds:DigestValue></ds:Reference></ds:SignedInfo>
+		<ds:SignatureValue Id="SignatureValue-1470376852">
+BWge8/dwwDY2ovgP646zflfv60PzHHGL2mWIRdFjqCjBCzkWraeSS0KnHRaF8S8G
+Hdr2CN6c+Bmtn3Em8CYfjEj6hCn2ozTO5pbD7NUcqzyZjNMfFr1kl/G6V0y2Q5Fe
+ph2o+nfIw3G4urDfRExJNiX4SgQQvlrzWGW842C+aO/foTpV0asCBdSCZKypnTh5
+r2Pls2FqCbesgwOVYjaNmQZp/TCJ4QTLLtXEKSWTCPa6aDNt6ejZKJvoWuj5Mmek
+s36WrumE5qIJB1PcWkFb/A4RxNvXYeb24NSxZ5M2b9zgdP2EY2UllWmntO12fG+y
+zfCR7RQ9cF0HeXchYi7Rpg==
+</ds:SignatureValue>
+		<ds:KeyInfo>
+			<ds:KeyValue xmlns="http://www.w3.org/2000/09/xmldsig#">
+				<ds:RSAKeyValue>
+					<ds:Modulus>
+nfVFeREfIcZAzbLm8JIQV+x+ilvY5PxPXiS2c8WzH7yakh52apH5krWEz7BKQ8g7
+VQHdpYzHQ7UDxPzkzdjtlYqKYMkGWx7uQ8Fk9+rHwinrmV7tz6r8o9ubJD8NSfzT
+/5UzzrVnlDVqN4haXtTEygJEYAgj7Tb/wBDdvJA/6okcvzBWPrH87+U/IhCvXmQm
+s+Mn/qrsSuh+S65mXAN3bPm9zfZ35Wv6lw7/a+k3OA1oJVvRML2rs7ILkyEoaLU7
+01OcX8cB4lTUVNtKTIeSTJcyQsPt0Gu36KhaCaSG+/RX4ocvml1P0ciEGy5m1VjQ
+pFUvFybHS8BdzjmljtwBwQ==
+</ds:Modulus>
+					<ds:Exponent>
+AQAB
+</ds:Exponent>
+				</ds:RSAKeyValue>
+			</ds:KeyValue>
+			<ds:X509Data xmlns="http://www.w3.org/2000/09/xmldsig#">
+				<ds:X509Certificate>
+MIIFnDCCBISgAwIBAgIIGoEMM0+5X20wDQYJKoZIhvcNAQEFBQAwgZAxGDAWBgNV
+BAkMDzIgUC4gVm9sb3YgU3RyLjEdMBsGA1UEAwwUU3RhbXBJVCBRdWFsaWZpZWQg
+Q0ExIjAgBgNVBAoMGUluZm9ybWF0aW9uIFNlcnZpY2VzIFBsYy4xDjAMBgNVBAcM
+BVNvZmlhMRQwEgYDVQQIDAtCOjgzMTY0MTc5MTELMAkGA1UEBhMCQkcwHhcNMTYw
+NTI3MDczODI3WhcNMTkwNTI3MDczODI3WjCBujEtMCsGCSqGSIb3DQEJARYecy5n
+cmFjaGVubGlldkBwaG9lbml4cGhhcm1hLmJnMSQwIgYDVQQDDBtTdG95YW4gRGlt
+aXRyb3YgR3JhY2hlbmxpZXYxHDAaBgNVBAoME1BIT0VOSVggUGhhcm1hIEVPT0Qx
+EzARBgNVBAcMClNvZmlhLTE3MDAxIzAhBgNVBAgMGkI6MjAzMjgzNjIzLEVHTjo3
+NTA0MTkwMDg2MQswCQYDVQQGEwJCRzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+AQoCggEBAJ31RXkRHyHGQM2y5vCSEFfsfopb2OT8T14ktnPFsx+8mpIedmqR+ZK1
+hM+wSkPIO1UB3aWMx0O1A8T85M3Y7ZWKimDJBlse7kPBZPfqx8Ip65le7c+q/KPb
+myQ/DUn80/+VM861Z5Q1ajeIWl7UxMoCRGAII+02/8AQ3byQP+qJHL8wVj6x/O/l
+PyIQr15kJrPjJ/6q7ErofkuuZlwDd2z5vc32d+Vr+pcO/2vpNzgNaCVb0TC9q7Oy
+C5MhKGi1O9NTnF/HAeJU1FTbSkyHkkyXMkLD7dBrt+ioWgmkhvv0V+KHL5pdT9HI
+hBsuZtVY0KRVLxcmx0vAXc45pY7cAcECAwEAAaOCAcwwggHIMDQGCCsGAQUFBwEB
+BCgwJjAkBggrBgEFBQcwAYYYaHR0cDovL29jc3Auc3RhbXBpdC5vcmcvMB0GA1Ud
+DgQWBBRH/YOnm1FfL4pR+IQ4qYtZEKZ5IDAMBgNVHRMBAf8EAjAAMB8GA1UdIwQY
+MBaAFL9ZG6vvjamAgkFnoDX56Tl2T94VMC4GCCsGAQUFBwEDBCIwIDAKBggrBgEF
+BQcLATAIBgYEAI5GAQEwCAYGBACORgEEMEoGA1UdIARDMEEwPwYLKwYBBAHYGgEB
+AQEwMDAuBggrBgEFBQcCARYiaHR0cDovL3d3dy5zdGFtcGl0Lm9yZy9yZXBvc2l0
+b3J5LzBBBgNVHR8EOjA4MDagNKAyhjBodHRwOi8vd3d3LnN0YW1waXQub3JnL2Ny
+bC9zdGFtcGl0X3F1YWxpZmllZC5jcmwwDgYDVR0PAQH/BAQDAgTwMDUGA1UdJQQu
+MCwGCCsGAQUFBwMCBggrBgEFBQcDBAYKKwYBBAGCNxQCAgYKKwYBBAGCNwoDDDA8
+BgNVHREENTAzpDEwLzEtMCsGA1UEAwwkUXVhbGlmaWVkIENlcnRpZmljYXRlIFN0
+YW1wSVQgRG9jUHJvMA0GCSqGSIb3DQEBBQUAA4IBAQAShRwePAZCQilpGiMB8kia
+M8WYETTnsBLEPW7AzN49I205I2jBz7b9iVQUxgTNO3NjdZLiOor7oJk5E87g59Lx
+qExN4iEddjd6nXmNFTvC1oSa/hQCQvRQqnMxo2+FMyWM3/jMq7gtiYUBE7VCL9WI
+c6UCi1tEHRanCEptcG3gal6NwGtaLpTxCuy6oLlxvmned8jZ7dtW1obHT/unJMEb
+Ia2sUStF6qlM4rJ4NqFP8cTSzmBSuww4ARDIlsk+O4XQpQbG7fT2n8eSO6+KWnso
++qQQU7tndOOk1tWLGypd6MSCwxHUrgeMUzFFsUfLe0WlMMJd3BgGYZrbfl+WKpa8
+</ds:X509Certificate>
+			</ds:X509Data>
+		</ds:KeyInfo>
+	      <ds:Object xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+            <xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Target="#Signature-MSCrypt-1470376852">
+                <xades:SignedProperties Id="SignedProperties-1470376852">
+                    <xades:SignedSignatureProperties>
+                        <xades:SigningTime>2016-08-05T09:00:52+03:00</xades:SigningTime>
+                    </xades:SignedSignatureProperties>
+                </xades:SignedProperties>
+            </xades:QualifyingProperties>
+        </ds:Object>
+</ds:Signature></Invoice>
