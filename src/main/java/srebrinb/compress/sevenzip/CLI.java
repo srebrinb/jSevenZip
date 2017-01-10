@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package bobs.is.compress.sevenzip;
+package srebrinb.compress.sevenzip;
 
 import java.io.File;
 import java.io.FileOutputStream;

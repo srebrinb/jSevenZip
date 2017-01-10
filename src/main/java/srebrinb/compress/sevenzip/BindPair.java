@@ -15,11 +15,14 @@
  *  limitations under the License.
  *
  */
-package bobs.is.compress.sevenzip;
+package srebrinb.compress.sevenzip;
 
-class Coder {
-    byte[] decompressionMethodId;
-    long numInStreams;
-    long numOutStreams;
-    byte[] properties = null;
+class BindPair {
+    long inIndex;
+    long outIndex;
+
+    @Override
+    public String toString() {
+        return "BindPair binding input " + inIndex + " to output " + outIndex;
+    }
 }

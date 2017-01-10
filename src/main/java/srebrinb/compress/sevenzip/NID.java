@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package bobs.is.compress.sevenzip;
+package srebrinb.compress.sevenzip;
 
 final class NID {
     public static final int kEnd = 0x00;

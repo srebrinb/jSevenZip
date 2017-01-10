@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bobs.is.compress.sevenzip;
+package srebrinb.compress.sevenzip;
 
-import static bobs.is.compress.sevenzip.BaseParams.resPath;
+import srebrinb.compress.sevenzip.SevenZMethod;
+import srebrinb.compress.sevenzip.SevenZArchiveEntry;
+import srebrinb.compress.sevenzip.SevenZOutputFile;
+import static srebrinb.compress.sevenzip.BaseParams.resPath;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

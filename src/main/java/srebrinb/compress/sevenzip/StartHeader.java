@@ -15,14 +15,10 @@
  *  limitations under the License.
  *
  */
-package bobs.is.compress.sevenzip;
+package srebrinb.compress.sevenzip;
 
-class BindPair {
-    long inIndex;
-    long outIndex;
-
-    @Override
-    public String toString() {
-        return "BindPair binding input " + inIndex + " to output " + outIndex;
-    }
+class StartHeader {
+    long nextHeaderOffset;
+    long nextHeaderSize;
+    long nextHeaderCrc;
 }

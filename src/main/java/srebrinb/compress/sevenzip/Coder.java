@@ -15,10 +15,11 @@
  *  limitations under the License.
  *
  */
-package bobs.is.compress.sevenzip;
+package srebrinb.compress.sevenzip;
 
-class StartHeader {
-    long nextHeaderOffset;
-    long nextHeaderSize;
-    long nextHeaderCrc;
+class Coder {
+    byte[] decompressionMethodId;
+    long numInStreams;
+    long numOutStreams;
+    byte[] properties = null;
 }
