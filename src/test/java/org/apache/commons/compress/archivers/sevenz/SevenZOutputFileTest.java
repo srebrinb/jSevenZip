@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package org.apache.commons.compress.archivers.sevenz;
+package srebrinb.compress.sevenzip;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

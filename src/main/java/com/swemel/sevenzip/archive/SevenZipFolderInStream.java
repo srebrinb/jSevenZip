@@ -35,7 +35,7 @@ public class SevenZipFolderInStream extends InputStream {
         _filePos = 0;
         while (_fileIndex < _numFiles) {
             stream = new InStreamWithCRC(updateItems.get(off + _fileIndex).getFullName());
-            System.out.println("readFile:"+updateItems.get(off + _fileIndex).getFullName()+" "+off);
+            
             _fileIndex++;
             stream.init();
             if (stream != null) {

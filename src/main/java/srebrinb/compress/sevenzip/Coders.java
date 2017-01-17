@@ -18,7 +18,6 @@
 package srebrinb.compress.sevenzip;
 
 import java.io.FilterInputStream;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -32,13 +31,12 @@ import java.util.zip.InflaterInputStream;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
+import org.apache.commons.compress.utils.FlushShieldFilterOutputStream;
 import org.tukaani.xz.ARMOptions;
 import org.tukaani.xz.ARMThumbOptions;
 import org.tukaani.xz.FilterOptions;
-import org.tukaani.xz.FinishableOutputStream;
 import org.tukaani.xz.FinishableWrapperOutputStream;
 import org.tukaani.xz.IA64Options;
-import org.tukaani.xz.LZMAInputStream;
 import org.tukaani.xz.PowerPCOptions;
 import org.tukaani.xz.SPARCOptions;
 import org.tukaani.xz.X86Options;
@@ -99,22 +97,6 @@ class Coders {
         }
     }
 
-    static class LZMADecoder extends CoderBase {
-        @Override
-        InputStream decode(final String archiveName, final InputStream in, final long uncompressedLength,
-                final Coder coder, final byte[] password) throws IOException {
-            final byte propsByte = coder.properties[0];
-            long dictSize = coder.properties[1];
-            for (int i = 1; i < 4; i++) {
-                dictSize |= (coder.properties[i + 1] & 0xffl) << (8 * i);
-            }
-            if (dictSize > LZMAInputStream.DICT_SIZE_MAX) {
-                throw new IOException("Dictionary larger than 4GiB maximum size used in " + archiveName);
-            }
-            return new LZMAInputStream(in, uncompressedLength, propsByte, (int) dictSize);
-        }
-    }
-    
     static class BCJDecoder extends CoderBase {
         private final FilterOptions opts;
         BCJDecoder(final FilterOptions opts) {
@@ -133,14 +115,11 @@ class Coders {
                                       e);
             }
         }
+        
+        @SuppressWarnings("resource")
         @Override
         OutputStream encode(final OutputStream out, final Object options) {
-            final FinishableOutputStream fo = opts.getOutputStream(new FinishableWrapperOutputStream(out));
-            return new FilterOutputStream(fo) {
-                @Override
-                public void flush() {
-                }
-            };
+            return new FlushShieldFilterOutputStream(opts.getOutputStream(new FinishableWrapperOutputStream(out)));
         }
     }
     

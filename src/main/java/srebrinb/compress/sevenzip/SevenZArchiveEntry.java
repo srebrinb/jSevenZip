@@ -47,7 +47,6 @@ public class SevenZArchiveEntry implements ArchiveEntry {
     private boolean hasCrc;
     private long crc, compressedCrc;
     private long size, compressedSize;
-    private long folderInx;
     private Iterable<? extends SevenZMethodConfiguration> contentMethods;
     
     public SevenZArchiveEntry() {
@@ -456,7 +455,7 @@ public class SevenZArchiveEntry implements ArchiveEntry {
      */
     public void setContentMethods(final Iterable<? extends SevenZMethodConfiguration> methods) {
         if (methods != null) {
-            final LinkedList<SevenZMethodConfiguration> l = new LinkedList<SevenZMethodConfiguration>();
+            final LinkedList<SevenZMethodConfiguration> l = new LinkedList<>();
             for (final SevenZMethodConfiguration m : methods) {
                 l.addLast(m);
             }
@@ -510,19 +509,5 @@ public class SevenZArchiveEntry implements ArchiveEntry {
         ntfsEpoch.set(1601, 0, 1, 0, 0, 0);
         ntfsEpoch.set(Calendar.MILLISECOND, 0);
         return ((date.getTime() - ntfsEpoch.getTimeInMillis())* 1000 * 10);
-    }
-
-    /**
-     * @return the folderInx
-     */
-    public long getFolderInx() {
-        return folderInx;
-    }
-
-    /**
-     * @param folderInx the folderInx to set
-     */
-    public void setFolderInx(long folderInx) {
-        this.folderInx = folderInx;
     }
 }

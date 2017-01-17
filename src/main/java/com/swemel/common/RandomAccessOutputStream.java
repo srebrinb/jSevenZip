@@ -15,7 +15,7 @@ public class RandomAccessOutputStream extends OutputStream {
     private int bufferSize = 0;
     private RandomAccessFile stream;
     private long size = 0;
-
+    public RandomAccessOutputStream(){}
     public RandomAccessOutputStream(File file, String mode) throws java.io.IOException {
         stream = new java.io.RandomAccessFile(file, mode);
     }

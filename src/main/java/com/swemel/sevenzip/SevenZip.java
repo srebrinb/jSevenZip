@@ -15,10 +15,10 @@ import java.util.logging.Logger;
 //import java.util.stream.Collectors;
 
 /**
- * This is rough java implementation of 7z archive algorithm. Translated into Java from C++.
- * It is simplified, and uses lzma compression algorithm provided by http://www.7-zip.org/
+ * This is rough java implementation of 7z archive algorithm. Translated into
+ * Java from C++. It is simplified, and uses lzma compression algorithm provided
+ * by http://www.7-zip.org/
  */
-
 public class SevenZip {
 
     private final List<UpdateItem> updateItems = new ArrayList<UpdateItem>();
@@ -28,8 +28,8 @@ public class SevenZip {
     private void collectFiles(String path, File... files) {
         for (File file : files) {
             if (!file.canRead()) {
-               // logger.warn("Can't read from file %:", file.getAbsolutePath());
-                Logger.getLogger(SevenZip.class.getName()).warning("Can't read from file "+file.getAbsolutePath());
+                // logger.warn("Can't read from file %:", file.getAbsolutePath());
+                Logger.getLogger(SevenZip.class.getName()).warning("Can't read from file " + file.getAbsolutePath());
                 continue;
             }
             UpdateItem ui = new UpdateItem();
@@ -50,24 +50,26 @@ public class SevenZip {
             ui.setIsDir(file.isDirectory());
             ui.setIsAnti(false);
             ui.setSize(file.length());
-            if (file.isDirectory())
+            if (file.isDirectory()) {
                 ui.setAttrib(16);
-            else
+            } else {
                 ui.setAttrib(32);
+            }
             ui.setAttribDefined(true);
             updateItems.add(ui);
             if (file.isDirectory()) {
+                System.out.println("isDirectory");
                 collectFiles(childName, file.listFiles());
             }
         }
     }
 
-    public SevenZip(String archiveName, File... files) throws IOException  {
-        
+    public SevenZip(String archiveName, File... files) throws IOException {
+
         collectFiles("", files);
-        
-           outStream = new RandomAccessOutputStream(new File(archiveName), "rw");
-        
+
+        outStream = new RandomAccessOutputStream(new File(archiveName), "rw");
+
     }
 
     private static void setMethodProperties(com.swemel.sevenzip.compression.lzma.Encoder encoder, long inSizeForReduce, LZMACoderInfo info) {
@@ -75,7 +77,7 @@ public class SevenZip {
         int dictionarySize = 1 << 24;
         int reducedDictionarySize = 1 << 10;
         if (inSizeForReduce != 0) {
-            for (; ; ) {
+            for (;;) {
                 int step = (reducedDictionarySize >> 1);
                 if (reducedDictionarySize >= inSizeForReduce) {
                     tryReduce = true;
@@ -86,14 +88,17 @@ public class SevenZip {
                     tryReduce = true;
                     break;
                 }
-                if (reducedDictionarySize >= (3 << 30))
+                if (reducedDictionarySize >= (3 << 30)) {
                     break;
+                }
                 reducedDictionarySize += step;
             }
         }
-        if (tryReduce)
-            if (reducedDictionarySize < dictionarySize)
+        if (tryReduce) {
+            if (reducedDictionarySize < dictionarySize) {
                 dictionarySize = reducedDictionarySize;
+            }
+        }
         info.setDictionarySize(dictionarySize);
         encoder.setDictionarySize(dictionarySize);
         encoder.setNumFastBytes(32);
@@ -105,9 +110,9 @@ public class SevenZip {
         OutArchive archive = new OutArchive();
         ArchiveDatabase newDatabase = new ArchiveDatabase();
         long kLzmaDicSizeX5 = 1 << 24;
-        long numSolidFiles = 100;//Long.MAX_VALUE;
+        long numSolidFiles = 1000;//Long.MAX_VALUE;
         long numSolidBytes = kLzmaDicSizeX5 << 7;
-        numSolidBytes=16*1024*1024;
+        numSolidBytes = 16 * 1024 * 1024;
         long inSizeForReduce = 0;
         System.out.println(numSolidBytes);
         for (UpdateItem updateItem : updateItems) {
@@ -130,26 +135,33 @@ public class SevenZip {
         int numSubFiles;
         LZMACoderInfo info = new LZMACoderInfo();
         setMethodProperties(encoder, inSizeForReduce, info);
-/*
+        /*
         emptyRefs.addAll(updateItems.stream().filter(ui -> !ui.isNewData() || !ui.hasStream()).collect(Collectors.toList()));
         emptyRefs.forEach(updateItems::remove);
-*/
-       
-         for (UpdateItem updateItem : updateItems) {
-            if (!updateItem.hasStream()||!updateItem.isNewData()){
+         */
+        System.out.println("updateItems = " + updateItems.size());
+//         for (UpdateItem updateItem : updateItems) {
+//            if (!updateItem.hasStream()||!updateItem.isNewData()){
+//                emptyRefs.add(updateItem);
+//                updateItems.remove(updateItem);
+//            }
+//        }
+        for (int i = 0; i < updateItems.size(); i++) {
+            UpdateItem updateItem = updateItems.get(i);
+
+            if (!updateItem.hasStream() || !updateItem.isNewData()) {
                 emptyRefs.add(updateItem);
                 updateItems.remove(updateItem);
             }
         }
-      
-  
-        for (int i = 0; i < updateItems.size(); ) {
+
+        for (int i = 0; i < updateItems.size();) {
             long totalSize = 0;
-            for (numSubFiles = 0; i + numSubFiles < updateItems.size() &&
-                    numSubFiles < numSolidFiles; numSubFiles++) {
+            for (numSubFiles = 0; i + numSubFiles < updateItems.size()
+                    && numSubFiles < numSolidFiles; numSubFiles++) {
                 totalSize += updateItems.get(i + numSubFiles).getSize();
                 if (totalSize > numSolidBytes) {
-                    System.out.println("break:"+totalSize);
+                    System.out.println("break:" + totalSize);
                     break;
                 }
             }
@@ -162,9 +174,9 @@ public class SevenZip {
 
             SevenZipFolderInStream inStream = new SevenZipFolderInStream();
             inStream.init(updateItems, i, numSubFiles);
-            System.out.println("strat code"+(i*numSubFiles));
+            System.out.println("strat code" + (i * numSubFiles));
             encoder.code(inStream, outStream);
-            System.out.println("end code"+(i*numSubFiles));
+            System.out.println("end code" + (i * numSubFiles));
             folder.addUnpackSize(inStream.getFullSize());
             for (int j = i; j < i + numSubFiles; j++) {
                 FileItem file = new FileItem();
@@ -191,7 +203,7 @@ public class SevenZip {
                 if (ui.ismTimeDefined()) {
                     newDatabase.addMTime(ui.getmTime());
                 }
-                newDatabase.addFile(file);                
+                newDatabase.addFile(file);
             }
             newDatabase.addFolder(folder);
             newDatabase.addPackSize(outStream.getSize());
@@ -200,7 +212,7 @@ public class SevenZip {
             i += numSubFiles;
         }
 
-        fillEmptyRefs(newDatabase);        
+        fillEmptyRefs(newDatabase);
         archive.writeDatabase(newDatabase);
         outStream.close();
     }
