@@ -12,7 +12,7 @@ import java.io.IOException;
 class Test {
     public static void main(String[] args) {
         try {
-            SevenZip sevenZip = new SevenZip("D:\\incubator\\commpressors\\test_100K_2_b.7z", new File("D:\\incubator\\commpressors\\test_100K_2\\"));
+            SevenZip sevenZip = new SevenZip("test_ok.7z", new File("invoices"));
             sevenZip.createArchive();
         } catch (IOException e) {
             e.printStackTrace();
