@@ -119,16 +119,16 @@ public class SevenZip {
         encoder.setDictionarySize(dictionarySize);
         encoder.setNumFastBytes(32);
         encoder.setMatchFinder(1);
-        encoder.setLcLpPb(3, 0, 2);
+        encoder.setLcLpPb(4, 0, 2);
     }
 
     public void createArchive() throws IOException, SQLException {
         OutArchive archive = new OutArchive();
         ArchiveDatabase newDatabase = new ArchiveDatabase();
         long kLzmaDicSizeX5 = 1 << 24;
-        long numSolidFiles = 1000;//Long.MAX_VALUE;
+        long numSolidFiles = 10000;//Long.MAX_VALUE;
         long numSolidBytes = kLzmaDicSizeX5 << 7;
-        numSolidBytes = 1600 * 1024 * 1024;
+        numSolidBytes = 128 * 1024 * 1024;
         long inSizeForReduce = 0;
         SevenZipStmtInStream inStream = new SevenZipStmtInStream((int)numSolidFiles);
         inStream.init(cursor);
@@ -198,9 +198,12 @@ public class SevenZip {
             //inStream.init(updateItems, i, numSubFiles);
             System.out.println("strat code:"+i+"/"+  numSubFiles);
             //encoder.code(inStream, outStream);
+            if (updateItems.get(i).getName().endsWith("pdf")){
+               encoder.setLcLpPb(7, 4,4);
+            }
             inStream.init(i,numSubFiles);
             encoder.code(inStream, outStream);
-            System.out.println("end code" + (i * numSubFiles));
+            System.out.println("end code:" + (i + numSubFiles));
             folder.addUnpackSize(inStream.getFullSize());
             for (int j = i; j < i + numSubFiles; j++) {
                 FileItem file = new FileItem();

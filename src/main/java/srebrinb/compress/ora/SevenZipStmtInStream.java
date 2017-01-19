@@ -94,8 +94,7 @@ public class SevenZipStmtInStream extends InputStream {
     void openStream() throws SQLException {
         _filePos = 0;
     currentIndex++;
-    if(numRowFatch >0 && currentIndex >numRowFatch){
-        System.out.println("ret");
+    if(numRowFatch >0 && currentIndex >numRowFatch){      
         sizes.add(0L);
         processed.add(true);
         addDigest();
@@ -125,7 +124,7 @@ public class SevenZipStmtInStream extends InputStream {
 
             stream = new InStreamBLOBWithCRC(blob);
             stream.init();
-System.out.println(currentIndex+" "+numSolidFiles+" "+_cursor.getString("FILENAME"));
+// System.out.println(currentIndex+" "+numSolidFiles+" "+_cursor.getString("FILENAME"));
             if (stream != null) {
                 _fileIsOpen = true;
                 _currentSize = stream.getSize();
@@ -138,7 +137,7 @@ System.out.println(currentIndex+" "+numSolidFiles+" "+_cursor.getString("FILENAM
         processed.add(true);
         addDigest();
         eof = true;
-        System.out.println("eof");
+ //       System.out.println("eof");
     }
 
     public void closeStream() throws IOException {
