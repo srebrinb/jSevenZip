@@ -39,19 +39,26 @@ public class SevenZipStmtInStream extends InputStream {
     private Boolean eof = false;
     int currentIndex = 0;
     int index = 0;
-    
+    private int numSolidFiles=10000;
+    private int numRowFatch=0;
+    SevenZipStmtInStream(int solidFiles){
+        numSolidFiles=solidFiles;
+    }
     public Vector<UpdateItem> getFiles() throws SQLException {
         updateItems = new Vector<UpdateItem>();
+        int i=0;
         while (_cursor.next()) {
             ui = new UpdateItem();
-            ui.setName(_cursor.getString("FILENAME"));
+            
             //   System.out.println(_cursor.getString("FILENAME"));
             //ui.setMTime(java.nio.file.attribute.FileTime.fromMillis(Timestamp.getTime()));          
 
             ui.setIsAnti(false);
             ui.setSize(0);
             long millis = System.currentTimeMillis();
-            ui.setFullName(_cursor.getString("FILENAME"));
+            String fileName =  _cursor.getString("FILENAME");//(i++)+".xml";
+            ui.setFullName(fileName);
+           ui.setName(fileName);           
             ui.setIsDir(false);
             ui.setIsAnti(false);
             ui.setAttrib(32);
@@ -74,13 +81,30 @@ public class SevenZipStmtInStream extends InputStream {
         size = 0;
         eof = false;
     }
-
+    public void init(int from,int numf) {
+       numRowFatch=numf;
+       processed.clear();
+       CRCs.clear();
+       sizes.clear();
+        _fileIsOpen = false;
+        _currentSizeIsDefined = false;
+        size = 0;
+        eof = false;
+    }
     void openStream() throws SQLException {
         _filePos = 0;
+    currentIndex++;
+    if(numRowFatch >0 && currentIndex >numRowFatch){
+        System.out.println("ret");
+        sizes.add(0L);
+        processed.add(true);
+        addDigest();
+        eof = true;
+        currentIndex=0;
+        return;
+    }
+        while (_cursor.next() ) {
 
-        while (_cursor.next()) {
-
-        if ((currentIndex++ % 1000)==0) return;
             BLOB blob = _cursor.getBLOB("FILECONT");
             if (blob == null) {
                 System.out.println("FILENAME is null " + _cursor.getString("FILENAME"));
@@ -101,20 +125,20 @@ public class SevenZipStmtInStream extends InputStream {
 
             stream = new InStreamBLOBWithCRC(blob);
             stream.init();
-
+System.out.println(currentIndex+" "+numSolidFiles+" "+_cursor.getString("FILENAME"));
             if (stream != null) {
                 _fileIsOpen = true;
-
                 _currentSize = stream.getSize();
                 _currentSizeIsDefined = true;
                 return;
             }
-
         }
+        
         sizes.add(0L);
         processed.add(true);
         addDigest();
         eof = true;
+        System.out.println("eof");
     }
 
     public void closeStream() throws IOException {

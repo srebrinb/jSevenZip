@@ -130,7 +130,7 @@ public class SevenZip {
         long numSolidBytes = kLzmaDicSizeX5 << 7;
         numSolidBytes = 1600 * 1024 * 1024;
         long inSizeForReduce = 0;
-        SevenZipStmtInStream inStream = new SevenZipStmtInStream();
+        SevenZipStmtInStream inStream = new SevenZipStmtInStream((int)numSolidFiles);
         inStream.init(cursor);
         com.swemel.sevenzip.compression.lzma.Encoder encoder = new com.swemel.sevenzip.compression.lzma.Encoder();
         
@@ -196,8 +196,9 @@ public class SevenZip {
 
             //SevenZipFolderInStream inStream = new SevenZipFolderInStream();
             //inStream.init(updateItems, i, numSubFiles);
-            System.out.println("strat code" + (i * numSubFiles));
+            System.out.println("strat code:"+i+"/"+  numSubFiles);
             //encoder.code(inStream, outStream);
+            inStream.init(i,numSubFiles);
             encoder.code(inStream, outStream);
             System.out.println("end code" + (i * numSubFiles));
             folder.addUnpackSize(inStream.getFullSize());
