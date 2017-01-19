@@ -162,12 +162,7 @@ public class SevenZip {
         emptyRefs.forEach(updateItems::remove);
          */
         System.out.println("updateItems = " + updateItems.size());
-//         for (UpdateItem updateItem : updateItems) {
-//            if (!updateItem.hasStream()||!updateItem.isNewData()){
-//                emptyRefs.add(updateItem);
-//                updateItems.remove(updateItem);
-//            }
-//        }
+
         for (int i = 0; i < updateItems.size(); i++) {
             UpdateItem updateItem = updateItems.get(i);
 

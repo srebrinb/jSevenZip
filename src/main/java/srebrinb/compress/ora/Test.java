@@ -49,13 +49,13 @@ public class Test {
         query ="select filename,filecont,DBMS_LOB.GETLENGTH(filecont) f_size from ( select fp.fp_filename filename,\n" +
 "     coalesce(fp.fp_filecont,(select dcont from docs d where d.did=fp_did and d.dtype=fp_dtype)) filecont  \n" +
 "     from \n" +
-"      files_for_pack fp where fp_pack_id=3  ORDER BY fp_id ASC NULLS FIRST) where rownum <= 100000";
+"      files_for_pack fp where fp_pack_id=2 and (fp_dtype<>'INV_ATTACHMENT' OR fp_dtype is null) ORDER BY fp_dtype ASC NULLS FIRST) where rownum <= 100000";
             System.out.println("query = " + query);
            OracleStatement stmt = (OracleStatement)conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY);
            OracleResultSet cursor = (OracleResultSet)stmt.executeQuery(query);
-            new File("test_pack2.7z").delete();
-            sz = new SevenZip("test_pack2.7z", cursor);
+            new File("test_pack_XML.7z").delete();
+            sz = new SevenZip("test_pack_XML.7z", cursor);
             sz.createArchive();
         } catch (Exception e) {
             e.printStackTrace();

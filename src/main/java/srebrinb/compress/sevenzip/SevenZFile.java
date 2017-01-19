@@ -953,10 +953,13 @@ public class SevenZFile implements Closeable {
     public int read() throws IOException {
         return getCurrentStream().read();
     }
+    public InputStream getStreamByIndex(int indx){
+        return deferredBlockStreams.get(indx);
+    }
     public ArrayList<InputStream>getStrams(){
         return deferredBlockStreams;
     }
-    private InputStream getCurrentStream() throws IOException {
+    public InputStream getCurrentStream() throws IOException {
         if (archive.files[currentEntryIndex].getSize() == 0) {
             return new ByteArrayInputStream(new byte[0]);
         }
@@ -1067,5 +1070,11 @@ public class SevenZFile implements Closeable {
     @Override
     public String toString() {
       return archive.toString();
+    }
+    /**
+     * @return the archive
+     */
+    public Archive getArchive() {
+        return archive;
     }
 }

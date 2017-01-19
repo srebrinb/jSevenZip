@@ -32,14 +32,18 @@ public class SevenZFileTest {
     public void testUnzip() throws Exception {
         System.out.println("Unzip");
         long startTime = System.currentTimeMillis();
-        File file = new File("src\\test\\resources\\1K_10blocks.7z");
+        File file = new File("test_pack2.7z");//new File("src\\test\\resources\\1K_10blocks.7z");
         SevenZFile archive = new SevenZFile(file);
      //   Iterable<SevenZArchiveEntry> entries = sevenZ.getEntries();
         SevenZArchiveEntry entry;
         int i=0;
         while ((entry = archive.getNextEntry()) != null) {
             
-            
+            if (!entry.getName().endsWith("BG123526430.123526430_1046887085.pdf")){
+                continue;
+            }
+                
+                
             entry.getWindowsAttributes();
         
                 byte[] b;
@@ -48,7 +52,7 @@ public class SevenZFileTest {
                 archive.read(b);
                 ByteArrayOutputStream output=new ByteArrayOutputStream();
                 IOUtils.write(b, output);                
-             //   System.out.println(entry.getName()+"\t"+output.size()+"\t"+ new String(output.toByteArray()));
+                System.out.println(entry.getName()+"\t"+output.size()+"\t"+ new String(output.toByteArray()));
                 output.close();
         }
         long endTime = System.currentTimeMillis();
@@ -56,27 +60,35 @@ public class SevenZFileTest {
     }
     @Test
     public void testGetBlocls() throws Exception {
-        System.out.println("Unzip");
+        System.out.println("GetBlocls");
         long startTime = System.currentTimeMillis();
-        File fileArh = new File("src\\test\\resources\\1K_xml_mock.7z");
+        File fileArh = new File("test_pack_PDF.7z");
         SevenZFile archive7zip = new SevenZFile(fileArh);  
         Archive archive = archive7zip.getArchive();
         System.out.println("archive = " + archive);
         
-        SevenZArchiveEntry[] files = archive.files;
-        for (SevenZArchiveEntry file : files) {
-            System.out.println("file = " + file.getName());
-        }
+//        SevenZArchiveEntry[] files = archive.files;
+//        for (SevenZArchiveEntry file : files) {
+//            System.out.println("file = " + file.getName());
+//        }
         
         Folder[] folders = archive.folders;
         for (Folder folder : folders) {
             System.out.println("folder = " + folder);
+            int unpackSubStreams=folder.numUnpackSubStreams;
+            System.out.println("unpackSubStreams = " + unpackSubStreams);
+            
+            
             BindPair[] bindPairs = folder.bindPairs;
             for (BindPair bindPair : bindPairs) {
+                
                 System.out.println("bindPair = " + bindPair);
             }
         }        
-        InputStream fileStream=archive7zip.getStreamByIndex(1);        
+        
+     //   ArrayList<InputStream> fileStreams=archive7zip.getStrams();// .getStreamByIndex(0);        
+     
+        System.out.println("fileStreams = " + fileStreams.size());
         IOUtils.copy(fileStream, new FileOutputStream("src\\test\\resources\\block"+100+".lzma"));
         fileStream.close();
         HashMap fileName = archive7zip.getMapFilename();        
