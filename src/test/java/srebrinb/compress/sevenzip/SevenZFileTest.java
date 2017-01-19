@@ -5,11 +5,6 @@
  */
 package srebrinb.compress.sevenzip;
 
-import srebrinb.compress.sevenzip.Folder;
-import srebrinb.compress.sevenzip.Archive;
-import srebrinb.compress.sevenzip.SevenZFile;
-import srebrinb.compress.sevenzip.BindPair;
-import srebrinb.compress.sevenzip.SevenZArchiveEntry;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;

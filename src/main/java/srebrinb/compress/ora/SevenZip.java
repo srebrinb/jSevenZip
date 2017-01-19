@@ -118,8 +118,8 @@ public class SevenZip {
         info.setDictionarySize(dictionarySize);
         encoder.setDictionarySize(dictionarySize);
         encoder.setNumFastBytes(32);
-        encoder.setMatchFinder(1);
-        encoder.setLcLpPb(4, 0, 2);
+        encoder.setMatchFinder(2);
+        encoder.setLcLpPb(3, 0, 2);
     }
 
     public void createArchive() throws IOException, SQLException {
@@ -155,7 +155,7 @@ public class SevenZip {
         
         int numSubFiles;
         LZMACoderInfo info = new LZMACoderInfo();
-        
+      
         setMethodProperties(encoder, inSizeForReduce, info);
         /*
         emptyRefs.addAll(updateItems.stream().filter(ui -> !ui.isNewData() || !ui.hasStream()).collect(Collectors.toList()));
@@ -198,9 +198,9 @@ public class SevenZip {
             //inStream.init(updateItems, i, numSubFiles);
             System.out.println("strat code:"+i+"/"+  numSubFiles);
             //encoder.code(inStream, outStream);
-            if (updateItems.get(i).getName().endsWith("pdf")){
-               encoder.setLcLpPb(7, 4,4);
-            }
+//            if (i>20000){//(updateItems.get(i).getName().endsWith("pdf")){
+//               encoder.setLcLpPb(3, 0,2);
+//            }
             inStream.init(i,numSubFiles);
             encoder.code(inStream, outStream);
             System.out.println("end code:" + (i + numSubFiles));
