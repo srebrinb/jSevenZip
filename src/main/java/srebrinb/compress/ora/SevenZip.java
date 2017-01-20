@@ -126,7 +126,7 @@ public class SevenZip {
         OutArchive archive = new OutArchive();
         ArchiveDatabase newDatabase = new ArchiveDatabase();
         long kLzmaDicSizeX5 = 1 << 24;
-        long numSolidFiles = 10000;//Long.MAX_VALUE;
+        long numSolidFiles = 1000;//Long.MAX_VALUE;
         long numSolidBytes = kLzmaDicSizeX5 << 7;
         numSolidBytes = 128 * 1024 * 1024;
         long inSizeForReduce = 0;

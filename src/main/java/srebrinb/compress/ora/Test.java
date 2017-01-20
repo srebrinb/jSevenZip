@@ -37,7 +37,7 @@ public class Test {
             System.out.println("init");
             OracleResultSet cursor = (OracleResultSet)call_stmt.getCursor(1);
         */
-        String query = "select filename,filecont from (\n" + 
+        String query = "select filename,filecont,DBMS_LOB.GETLENGTH(filecont) f_size from (\n" + 
                     "       select d.id  || decode(DTYPE,'INV','.xml','.pdf') filename,\n" + 
                     "         d.dcont filecont         \n" + 
                     "       from docs d\n" + 
@@ -45,17 +45,17 @@ public class Test {
                     "            d.dtype='INV'\n" + 
                     "       order by d.id\n" + 
                     "      )        \n" + 
-                    "      where rownum <10000";
-        query ="select filename,filecont,DBMS_LOB.GETLENGTH(filecont) f_size from ( select fp.fp_filename filename,\n" +
-"     coalesce(fp.fp_filecont,(select dcont from docs d where d.did=fp_did and d.dtype=fp_dtype)) filecont  \n" +
-"     from \n" +
-"      files_for_pack fp where fp_pack_id=2 and (fp_dtype<>'INV_ATTACHMENT' OR fp_dtype is null) ORDER BY fp_dtype ASC NULLS FIRST) where rownum <= 100000";
+                    "      where rownum <=10000";
+//        query ="select filename,filecont,DBMS_LOB.GETLENGTH(filecont) f_size from ( select fp.fp_filename filename,\n" +
+//"     coalesce(fp.fp_filecont,(select dcont from docs d where d.did=fp_did and d.dtype=fp_dtype)) filecont  \n" +
+//"     from \n" +
+//"      files_for_pack fp where fp_pack_id=3 and (fp_dtype<>'INV_ATTACHMENT' OR fp_dtype is null) ORDER BY fp_dtype ASC NULLS FIRST) where rownum <= 1100";
             System.out.println("query = " + query);
            OracleStatement stmt = (OracleStatement)conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY);
            OracleResultSet cursor = (OracleResultSet)stmt.executeQuery(query);
-            new File("test_pack_XML.7z").delete();
-            sz = new SevenZip("test_pack_XML.7z", cursor);
+            new File("test_pack_XML_10k.7z").delete();
+            sz = new SevenZip("test_pack_XML_10k.7z", cursor);
             sz.createArchive();
         } catch (Exception e) {
             e.printStackTrace();

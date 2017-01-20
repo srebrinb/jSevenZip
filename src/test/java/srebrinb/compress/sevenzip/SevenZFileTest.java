@@ -5,10 +5,12 @@
  */
 package srebrinb.compress.sevenzip;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,15 +33,17 @@ public class SevenZFileTest {
     @Test
     public void testUnzip() throws Exception {
         System.out.println("Unzip");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        br.readLine();
         long startTime = System.currentTimeMillis();
-        File file = new File("test_pack2.7z");//new File("src\\test\\resources\\1K_10blocks.7z");
+        File file = new File("test_pack_XML_100k.7z");//new File("src\\test\\resources\\1K_10blocks.7z");
         SevenZFile archive = new SevenZFile(file);
      //   Iterable<SevenZArchiveEntry> entries = sevenZ.getEntries();
         SevenZArchiveEntry entry;
         int i=0;
         while ((entry = archive.getNextEntry()) != null) {
             
-            if (!entry.getName().endsWith("BG123526430.123526430_1046887085.pdf")){
+            if (!entry.getName().endsWith("5908123.xml")){
                 continue;
             }
                 
@@ -86,15 +90,15 @@ public class SevenZFileTest {
             }
         }        
         
-     //   ArrayList<InputStream> fileStreams=archive7zip.getStrams();// .getStreamByIndex(0);        
-     
-        System.out.println("fileStreams = " + fileStreams.size());
-        IOUtils.copy(fileStream, new FileOutputStream("src\\test\\resources\\block"+100+".lzma"));
-        fileStream.close();
-        HashMap fileName = archive7zip.getMapFilename();        
-        System.out.println("fileName = " + fileName.get("test_30"));
-        InputStream fileStreamnew=archive7zip.getStreamByName("test_30");
-        IOUtils.copy(fileStreamnew, new FileOutputStream("src\\test\\resources\\test_30"));
+//        ArrayList<InputStream> fileStreams=archive7zip.getStreamByIndex(0);        
+//     
+//        System.out.println("fileStreams = " + fileStreams.size());
+//        IOUtils.copy(fileStream, new FileOutputStream("src\\test\\resources\\block"+100+".lzma"));
+//        fileStream.close();
+//        HashMap fileName = archive7zip.getMapFilename();        
+//        System.out.println("fileName = " + fileName.get("test_30"));
+//        InputStream fileStreamnew=archive7zip.getStreamByName("test_30");
+//        IOUtils.copy(fileStreamnew, new FileOutputStream("src\\test\\resources\\test_30"));
         /* for (SevenZArchiveEntry file : files) {
         System.out.println("file = " + file.toString());
         }
