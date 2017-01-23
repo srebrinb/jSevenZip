@@ -14,6 +14,7 @@ import static spark.Spark.*;
 public class WebApp {
     public static void main(String[] args) {
       port(9001); 
-      
+      get("/hello", (req, res) -> "Hello World");
+      get(Path.Web.UNZIP,       DecommpressController.unzipFile);
     }
 }

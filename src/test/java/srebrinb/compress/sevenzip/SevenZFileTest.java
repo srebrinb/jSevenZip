@@ -33,26 +33,27 @@ public class SevenZFileTest {
     @Test
     public void testUnzip() throws Exception {
         System.out.println("Unzip");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        br.readLine();
+      //  BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       // br.readLine();
         long startTime = System.currentTimeMillis();
-        File file = new File("test_pack_XML_100k.7z");//new File("src\\test\\resources\\1K_10blocks.7z");
+        File file = new File("jSevenZip.7z");//new File("src\\test\\resources\\1K_10blocks.7z");
         SevenZFile archive = new SevenZFile(file);
      //   Iterable<SevenZArchiveEntry> entries = sevenZ.getEntries();
         SevenZArchiveEntry entry;
         int i=0;
         while ((entry = archive.getNextEntry()) != null) {
             
-            if (!entry.getName().endsWith("5908123.xml")){
+            if (!entry.getName().endsWith("pom.xml")){
                 continue;
             }
                 
+           
                 
             entry.getWindowsAttributes();
         
                 byte[] b;
                 b = new byte[(int)entry.getSize()];
-                
+                System.out.println("b = " + (int)entry.getSize());
                 archive.read(b);
                 ByteArrayOutputStream output=new ByteArrayOutputStream();
                 IOUtils.write(b, output);                
